@@ -1,5 +1,6 @@
 import { ContextSpecs } from '../../types';
 import { GetterParameters, GetterParams } from '../../types/getters';
+import { isString } from '../../utils/is';
 import { sanitize } from '../../utils/string';
 import { resolveValue } from '../resolvers/value';
 
@@ -79,7 +80,11 @@ export const getParams = ({
       }${
         !resolvedValue.originalSchema!.default
           ? `: ${resolvedValue.value}`
-          : `= ${resolvedValue.originalSchema!.default}`
+          : `= ${
+              isString(resolvedValue.originalSchema!.default)
+                ? `'${resolvedValue.originalSchema!.default}'`
+                : resolvedValue.originalSchema!.default
+            }`
       }`;
 
       return {
