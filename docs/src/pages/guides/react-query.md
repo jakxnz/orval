@@ -68,7 +68,11 @@ export const useShowPetById = <
 };
 ```
 
-### How use other query
+### How use other query settings and options
+
+Orval can modify query options for all paths/operations or a subset of paths/operations.
+
+### Query settings and options for all paths/operations
 
 With the following example Orval will generate a useQuery and useInfinteQuery with a nextId queryparam. You can also override the config for each one with the options props.
 
@@ -93,7 +97,9 @@ module.exports = {
 };
 ```
 
-If needed you can also override directly to an operation or a tag
+### Query settings and options for specific paths/operations
+
+If needed you can override specific paths/operations directly via operations or tags
 
 ```js
 module.exports = {
@@ -108,6 +114,13 @@ module.exports = {
             },
           }
         },
+        tags: {
+          pet: { // Must match OpenApi document
+            query: {
+              ...
+            }
+          }
+        }
       },
     }
     ...
